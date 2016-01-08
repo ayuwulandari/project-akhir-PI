@@ -1,0 +1,31 @@
+<?php
+include('koneksi.php');
+
+	$user = mysql_real_escape_string(htmlentities($_POST['username']));
+	$pass = mysql_real_escape_string(htmlentities($_POST['password']));
+ 	
+ 	echo $user;
+ 	echo $pass;
+
+	$sql = mysql_query("SELECT * FROM admin WHERE username='$user' AND password='$pass'") or die(mysql_error());
+	if(mysql_num_rows($sql) <= 0){
+		echo 'User tidak ditemukan';
+	}else{
+		$row = mysql_fetch_array($sql);
+		//$nama = $row['nama'];
+		//echo '<script language="javascript">alert("Anda berhasil Login !");document.location=admin.php;</script>';
+		header("location:admin.php?page=");
+		
+		/*
+		echo '<script language="javascript">alert("Anda berhasil Login Admin!"); document.location="admin/index.php";</script>';
+		if($row['level'] == 1){
+			$_SESSION['admin']=$user;
+			echo '<script language="javascript">alert("Anda berhasil Login Admin!"); document.location="admin/index.php";</script>';
+		}else{
+			$_SESSION['guest']=$user;
+			echo '<script language="javascript">alert("Anda berhasil Login Guest!"); document.location="guest/index.php";</script>';
+		}
+		*/
+	}
+
+?>
